@@ -1,10 +1,48 @@
 let chatBox;
 let roomName;
+let nameInput = document.getElementById('username-input');
+let msgInput = document.getElementById('msg-input');
+let sendButton = document.getElementById('send-button');
+let myStory = "";
 
-//initialize nedb
-// let Datastore = require('nedb');
-// let db = new Datastore('stories.db');
-// db.loadDatabase();
+
+//countdown timer
+const startingMinutes = 3;
+let time = startingMinutes * 60;
+let countdownEl = document.getElementById('countdown');
+
+let timeInterval = setInterval(updateCountdown, 1000);
+
+
+function updateCountdown() {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    countdownEl.innerHTML = `${minutes}:${seconds}`;
+
+    time--;
+
+    if (time < 0) {
+        clearInterval(timeInterval);
+
+        chatBox.innerHTML = "";
+
+        let storyEl = document.createElement('p');
+
+        storyEl.innerHTML = myStory;
+
+        //Add the element with the message to the page
+        chatBox.appendChild(storyEl);
+
+        chatBox.style.overflow = "scroll";
+    };
+    //when timer = 0, stop time--
+
+    //when timer = 0, post myStory on html block
+};
+
 
 window.addEventListener('load', function () {
 
@@ -48,43 +86,52 @@ window.addEventListener('load', function () {
     socket.on('msg', function (data) {
         console.log("Message arrived!");
         console.log(data);
+        myStory = myStory + data.msg;
+        console.log(myStory);
         addMsgToPage(data);
         //db.insert(data);
     });
 
-    /* --- Code to SEND a socket message to the Server --- */
-    let nameInput = document.getElementById('username-input')
-    let msgInput = document.getElementById('msg-input');
-    let sendButton = document.getElementById('send-button');
 
-    sendButton.addEventListener('click', function () {
-        let curName = nameInput.value;
-        let curMsg = msgInput.value;
-        let msgObj = {
-            "name": curName,
-            "msg": curMsg
+    msgInput.addEventListener('keyup', function (event) {
+        if (event.keyCode === 32) {
+            let curName = nameInput.value;
+            let curMsg = msgInput.value;
+            let msgObj = {
+                "name": curName,
+                "msg": curMsg
+            };
+
+            //after space pressed clear input
+            msgInput.value = "";
+            //Send the message object to the server
+            socket.emit('msg', msgObj);
         };
 
-        //Send the message object to the server
-        socket.emit('msg', msgObj);
+
 
     });
-    sendButton.addEventListener("keyup", function (event) {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            // Cancel the default action, if needed
-            //event.preventDefault();
-            // Trigger the button element with a click
-            document.getElementById("myBtn").click();
-        }
-    });
+
 });
+
+function sendMsg(obj) {
+    let curName = nameInput.value;
+    let curMsg = msgInput.value;
+    let msgObj = {
+        "name": curName,
+        "msg": curMsg
+    };
+
+    //Send the message object to the server
+    socket.emit('msg', msgObj);
+};
 
 function addMsgToPage(obj) {
     //Create a message string and page element
     let receivedMsg;
     if (obj.newUser) {
         receivedMsg = obj.msg;
+
     } else {
         receivedMsg = obj.name + ": " + obj.msg;
     }
@@ -98,4 +145,4 @@ function addMsgToPage(obj) {
 
 
 
-}
+};

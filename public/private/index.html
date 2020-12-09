@@ -10,12 +10,15 @@
 </head>
 
 <body>
+    <p id="countdown"></p>
     <div class="container">
         <!-- View chat messages here here -->
         <div class="sub-container chat-feed">
             <div class="chat-header">Internet Exquisite Corpse<span id="roomName"></span></div>
             <!--<a href="public/index.html" class="btn">Leave Room</a>-->
-            <div class="chat-box" id="chat-box-msgs"></div>
+
+            <div class="chat-box" id="chat-box-msgs">
+            </div>
         </div>
 
         <!-- Enter chat messages here -->
@@ -23,7 +26,7 @@
             <input type="text" class="chat-input-name" id="username-input" placeholder="chat name" />
             <input type="text" class="chat-input-msg" id="msg-input"
                 placeholder="submit one word to continue the story" />
-            <button id="send-button">Send</button>
+            <!--<button id="send-button">Send</button>-->
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"

@@ -1,6 +1,7 @@
 let chatBox;
 
 
+
 // Get username and room from URL
 //const {
 //username,
@@ -34,6 +35,8 @@ window.addEventListener('load', function () {
     let roomName = document.getElementById('roomName');
     let nameInput = document.getElementById('username');
     let createButton = document.getElementById('createButton');
+    let joinButton = document.getElementById('joinButton');
+
     createButton.addEventListener('click', () => {
         let username = nameInput.value;
         let roomNameInput = roomName.value;
@@ -46,13 +49,7 @@ window.addEventListener('load', function () {
     });
 
     joinButton.addEventListener('click', () => {
-        let username = nameInput.value;
-        let existingRmInput = existingRoom.value;
-        let userRmObj = {
-            "username": username,
-            "roomName": existingRmInput,
-        };
-        socket.emit('userRmMsg', userRmObj);
+        window.location.href = '/private/index.html';
     });
 
     //let space bar enter the word
@@ -67,37 +64,4 @@ window.addEventListener('load', function () {
     console.log(e);
     document.dispatchEvent(e);
 
-
-
-    //let msgInput = document.getElementById('msg-input');
-    // let sendButton = document.getElementById('send-button');
-
-    // sendButton.addEventListener('click', function () {
-    //     let curName = nameInput.value;
-
-    //     let curMsg = msgInput.value;
-    //     let msgObj = {
-    //         "name": curName,
-    //         "date": Date.now(),
-    //         "msg": curMsg
-    //     };
-
-    //     //Send the message object to the server
-    //     socket.emit('msg', msgObj);
-
-    //     //save msg obj to nedb
-    //     db.insert(msgObj);
-
-    //     function addMsgToPage(obj) {
-    //         //Create a message string and page element
-    //         let receivedMsg = obj.name + ": " + obj.msg;
-    //         let msgEl = document.createElement('p');
-    //         msgEl.innerHTML = receivedMsg;
-
-    //         //Add the element with the message to the page
-    //         chatBox.appendChild(msgEl);
-    //         //Add a bit of auto scroll for the chat box
-    //         chatBox.scrollTop = chatBox.scrollHeight;
-    //     };
-    // });
 });

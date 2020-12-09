@@ -11,37 +11,22 @@
 
 <body>
 
-    <ul class="pages">
-        <li class="chat page">
-            <div class="chatArea">
-                <ul class="messages"></ul>
-            </div>
-            <input class="inputMessage" placeholder="Type here..." />
-        </li>
-        <li class="login page">
-            <div class="form">
-                <h3 class="title">What's your nickname?</h3>
-                <input class="usernameInput" type="text" maxlength="14" />
-            </div>
-        </li>
-    </ul>
-    <!-- <div class="container">
-     
-        <div class="chat-header">internet exquisite corpse</div>
-        <a>
-            <button id="finished-button">finished stories</button>
-        </a>
+    <div class="container">
+
+        <div id="chat-box">
 
 
-        <button type="submit" id="joinButton" link="private/index.html" class="btn">join exquisite corpse</button>
-        <div></div>
+            <button class="button" id="joinButton" onclick='window.location.href = "/private/index.html"'
+                class="btn">join
+                the exquisite corpse</button>
+            <div></div>
 
 
-    </div> -->
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script src="private/script1.js"></script>
 </body>
 
 </html>
