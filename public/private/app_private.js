@@ -7,7 +7,7 @@ let myStory = "";
 
 
 //countdown timer
-const startingMinutes = 3;
+const startingMinutes = 1.5;
 let time = startingMinutes * 60;
 let countdownEl = document.getElementById('countdown');
 
