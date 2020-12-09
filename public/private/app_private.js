@@ -38,9 +38,7 @@ function updateCountdown() {
 
         chatBox.style.overflow = "scroll";
     };
-    //when timer = 0, stop time--
 
-    //when timer = 0, post myStory on html block
 };
 
 
@@ -53,16 +51,7 @@ window.addEventListener('load', function () {
         console.log("Connected");
     });
 
-    //Get room name
-    //let roomName = document.getElementById('roomName');
-    //let roomName = window.prompt("create a new haiku");
-    //console.log(roomName);
 
-    //Check if a name was entered
-    //if (roomName) {
-    //let roomNameOnPage = document.getElementById('roomName');
-    //roomNameOnPage.innerHTML = roomName;
-    //Emit Msg to join the room
     socket.emit('room', {
         "room": "main-room"
     });

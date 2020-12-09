@@ -3,11 +3,6 @@ let express = require('express');
 let app = express();
 app.use('/', express.static('public'));
 
-//initialize nedb
-let Datastore = require('nedb');
-let db = new Datastore('stories.db');
-db.loadDatabase();
-
 
 //initialize the actual HTTP server
 let http = require('http');
